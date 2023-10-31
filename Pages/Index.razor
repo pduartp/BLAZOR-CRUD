@@ -1,5 +1,6 @@
 ﻿@page "/"
 @inject ProdutoServices service
+@inject IJSRuntime JsRuntime
 <h1>InfoTech Store</h1>
 <div class="container">
 
@@ -27,8 +28,9 @@
                             <td>@prod.Quant</td>
                             <td>@prod.Descr</td>
                             <td>
-                                <button class="btn btn-danger"
-                                @onclick="(() => ApagaProduto(prod))">Deletar</button>
+                                <button class="btn btn-danger" 
+                                    @onclick="@(async () => await ApagaProduto(prod))">Deletar
+                                </button>
                             </td>
                         </tr>
                     }
@@ -42,6 +44,11 @@
     </div>
 </div>
 
+<script>
+    window.Confirmar = function (mensagem) {
+        return confirm(mensagem);
+    }
+</script>
 
 @code {
     List<Produto> Produtos = new List<Produto>();
@@ -55,8 +62,14 @@
         Produtos = await service.RetornaProdutoAsync();
     }
 
-    private async Task ApagaProduto(Produto prod) {
-        await service.DeleteProductAsync(prod);
-        await AtualizaProdutos();
+    private async Task ApagaProduto(Produto prod)
+    {
+        bool confirmed = await JsRuntime.InvokeAsync<bool>
+            ("Confirmar", "Você tem certeza?");
+            if (confirmed)
+            {
+                await service.DeleteProductAsync(prod);
+                await AtualizaProdutos();
+            }
     }
 }
