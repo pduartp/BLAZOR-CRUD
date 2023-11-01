@@ -42,16 +42,26 @@
             </tbody>
         </table>
     </div>
+
+    @if (produtoExcluido)
+    {
+        <div style="color: red">
+            <strong>@mensagemExclusao</strong>
+        </div>
+    }
 </div>
 
 <script>
-    window.Confirmar = function (mensagem) {
+    window.Confirmar = function (mensagem, id) {
         return confirm(mensagem);
     }
 </script>
 
 @code {
     List<Produto> Produtos = new List<Produto>();
+    bool produtoExcluido = false;
+    string mensagemExclusao = string.Empty;
+
     protected override async Task OnInitializedAsync()
     {
         await AtualizaProdutos();
@@ -64,12 +74,23 @@
 
     private async Task ApagaProduto(Produto prod)
     {
-        bool confirmed = await JsRuntime.InvokeAsync<bool>
-            ("Confirmar", "Você tem certeza?");
-            if (confirmed)
-            {
-                await service.DeleteProductAsync(prod);
-                await AtualizaProdutos();
-            }
+        bool confirmed = await JsRuntime.InvokeAsync<bool>("Confirmar", "Você tem certeza?", prod.Id);
+        if (confirmed)
+        {
+            await service.DeleteProductAsync(prod);
+            await AtualizaProdutos();
+
+            mensagemExclusao = $"Produto {prod.Nome} com sucesso!";
+            produtoExcluido = true;
+            
+            //Timer timer = new Timer(TimerCallback, null, 3000, Timeout.Infinite);
+        }
     }
+
+    /*private void TimerCallback(object state)
+    {
+        mensagemExclusao = string.Empty;
+        produtoExcluido = false;
+        StateHasChanged();
+    }*/
 }
