@@ -40,9 +40,9 @@
                     <tr><td colspan="6"><strong>Nenhum produto disponível</strong></td></tr>
                 }
             </tbody>
+            <NavLink href="/novoproduto">Criar novo produto</NavLink>
         </table>
     </div>
-
     @if (produtoExcluido)
     {
         <div style="color: red">
@@ -80,17 +80,8 @@
             await service.DeleteProductAsync(prod);
             await AtualizaProdutos();
 
-            mensagemExclusao = $"Produto {prod.Nome} com sucesso!";
+            mensagemExclusao = $"Produto {prod.Nome} excluído com sucesso!";
             produtoExcluido = true;
-            
-            //Timer timer = new Timer(TimerCallback, null, 3000, Timeout.Infinite);
         }
     }
-
-    /*private void TimerCallback(object state)
-    {
-        mensagemExclusao = string.Empty;
-        produtoExcluido = false;
-        StateHasChanged();
-    }*/
 }
