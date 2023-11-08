@@ -25,6 +25,16 @@ public class ProdutoServices
     }
 
     /// <summary>
+    /// Recupera id de um produto para DbContext e o salva
+    /// </summary>
+    /// <param name="prod"></param>
+    /// <returns></returns>
+    public async Task<Produto> GetProductByIdAsync(int id)
+    {
+        return await dbContext.Produto.FirstOrDefaultAsync(p => p.Id == id);
+    }
+
+    /// <summary>
     /// Adiciona um novo produto para DbContext e o salva
     /// </summary>
     /// <param name="prod"></param>

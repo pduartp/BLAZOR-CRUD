@@ -1,6 +1,8 @@
 ﻿@page "/"
 @inject ProdutoServices service
 @inject IJSRuntime JsRuntime
+@inject NavigationManager navigationManager
+
 <h1>InfoTech Store</h1>
 <div class="container">
 
@@ -30,6 +32,9 @@
                             <td>
                                 <button class="btn btn-danger" 
                                     @onclick="@(async () => await ApagaProduto(prod))">Deletar
+                                </button>
+                                <button class="btn btn-success" 
+                                    @onclick="@(async () => await AtualizarProduto(prod))">Editar Produto
                                 </button>
                             </td>
                         </tr>
@@ -83,5 +88,11 @@
             mensagemExclusao = $"Produto {prod.Nome} excluído com sucesso!";
             produtoExcluido = true;
         }
+    }
+
+    private async Task AtualizarProduto(Produto prod)
+    {
+        // Navegar para a rota de atualizar o produto com o ID do produto
+        navigationManager.NavigateTo($"/atualizarproduto/{prod.Id}");
     }
 }
