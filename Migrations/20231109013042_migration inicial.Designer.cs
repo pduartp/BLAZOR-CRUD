@@ -10,7 +10,7 @@ using info_app.Data;
 namespace info_app.Migrations
 {
     [DbContext(typeof(ProdutoDbContext))]
-    [Migration("20231101162940_migration inicial")]
+    [Migration("20231109013042_migration inicial")]
     partial class migrationinicial
     {
         /// <inheritdoc />
@@ -31,7 +31,7 @@ namespace info_app.Migrations
                     b.Property<string>("Nome")
                         .HasColumnType("TEXT");
 
-                    b.Property<double>("Preço")
+                    b.Property<double>("Preco")
                         .HasColumnType("REAL");
 
                     b.Property<int>("Quant")
@@ -47,7 +47,7 @@ namespace info_app.Migrations
                             Id = 1001,
                             Descr = "Excelente notebook",
                             Nome = "Laptop",
-                            Preço = 2000.02,
+                            Preco = 2000.02,
                             Quant = 10
                         },
                         new
@@ -55,7 +55,7 @@ namespace info_app.Migrations
                             Id = 1002,
                             Descr = "Um MS Office",
                             Nome = "Microsoft Office",
-                            Preço = 400.99000000000001,
+                            Preco = 400.99000000000001,
                             Quant = 50
                         },
                         new
@@ -63,7 +63,7 @@ namespace info_app.Migrations
                             Id = 1003,
                             Descr = "Um mouse que funciona",
                             Nome = "Mouse",
-                            Preço = 12.02,
+                            Preco = 12.02,
                             Quant = 20
                         },
                         new
@@ -71,7 +71,7 @@ namespace info_app.Migrations
                             Id = 1004,
                             Descr = "Armazene incríveis 256GB de dados",
                             Nome = "HD USB",
-                            Preço = 5.0,
+                            Preco = 5.0,
                             Quant = 200
                         });
                 });

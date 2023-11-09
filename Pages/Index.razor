@@ -15,7 +15,6 @@
                     <th>Preço</th>
                     <th>Quantidade</th>
                     <th>Descrição</th>
-                    
                 </tr>
             </thead>
             <tbody>
@@ -26,13 +25,16 @@
                         <tr>
                             <td>@prod.Id</td>
                             <td>@prod.Nome</td>
-                            <td>@prod.Preço</td>
+                            <td>@prod.Preco</td>
                             <td>@prod.Quant</td>
                             <td>@prod.Descr</td>
-                            <td>
+                            <td align="center">
                                 <button class="btn btn-danger" 
                                     @onclick="@(async () => await ApagaProduto(prod))">Deletar
                                 </button>
+
+                                <span style="margin: 0 20px;"></span>
+
                                 <button class="btn btn-success" 
                                     @onclick="@(async () => await AtualizarProduto(prod))">Editar Produto
                                 </button>
@@ -45,9 +47,9 @@
                     <tr><td colspan="6"><strong>Nenhum produto disponível</strong></td></tr>
                 }
             </tbody>
-            <NavLink href="/novoproduto">Criar novo produto</NavLink>
         </table>
     </div>
+    <NavLink href="/novoproduto">Criar novo produto</NavLink>
     @if (produtoExcluido)
     {
         <div style="color: red">
@@ -77,22 +79,22 @@
         Produtos = await service.RetornaProdutoAsync();
     }
 
-    private async Task ApagaProduto(Produto prod)
+    private async Task ApagaProduto(Produto Prod)
     {
-        bool confirmed = await JsRuntime.InvokeAsync<bool>("Confirmar", "Você tem certeza?", prod.Id);
+        bool confirmed = await JsRuntime.InvokeAsync<bool>("Confirmar", "Você tem certeza?", Prod.Id);
         if (confirmed)
         {
-            await service.DeleteProductAsync(prod);
+            await service.DeleteProductAsync(Prod);
             await AtualizaProdutos();
 
-            mensagemExclusao = $"Produto {prod.Nome} excluído com sucesso!";
+            mensagemExclusao = $"Produto \"{Prod.Nome}\" excluído com sucesso!";
             produtoExcluido = true;
         }
     }
 
-    private async Task AtualizarProduto(Produto prod)
+    private async Task AtualizarProduto(Produto Prod)
     {
-        // Navegar para a rota de atualizar o produto com o ID do produto
-        navigationManager.NavigateTo($"/atualizarproduto/{prod.Id}");
+        // navegar para a rota de atualizar o produto com o id do produto
+        navigationManager.NavigateTo($"/editarproduto/{Prod.Id}", forceLoad: true);
     }
 }

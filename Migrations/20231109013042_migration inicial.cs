@@ -19,7 +19,7 @@ namespace info_app.Migrations
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Nome = table.Column<string>(type: "TEXT", nullable: true),
-                    Preço = table.Column<double>(type: "REAL", nullable: false),
+                    Preco = table.Column<double>(type: "REAL", nullable: false),
                     Descr = table.Column<string>(type: "TEXT", nullable: true),
                     Quant = table.Column<int>(type: "INTEGER", nullable: false)
                 },
@@ -30,7 +30,7 @@ namespace info_app.Migrations
 
             migrationBuilder.InsertData(
                 table: "Produto",
-                columns: new[] { "Id", "Descr", "Nome", "Preço", "Quant" },
+                columns: new[] { "Id", "Descr", "Nome", "Preco", "Quant" },
                 values: new object[,]
                 {
                     { 1001, "Excelente notebook", "Laptop", 2000.02, 10 },
