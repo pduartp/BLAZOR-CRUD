@@ -52,6 +52,6 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'infoappCRUDpdp'
-          slot-name: 'Development'
+          slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_49111DBCE33C44FDAD74BBC51622E827 }}
           package: .
