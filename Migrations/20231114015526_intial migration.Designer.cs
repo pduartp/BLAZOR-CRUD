@@ -10,7 +10,7 @@ using info_app.Data;
 namespace info_app.Migrations
 {
     [DbContext(typeof(ProdutoDbContext))]
-    [Migration("20231114002047_intial migration")]
+    [Migration("20231114015526_intial migration")]
     partial class intialmigration
     {
         /// <inheritdoc />
