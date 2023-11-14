@@ -7,7 +7,7 @@
 namespace info_app.Migrations
 {
     /// <inheritdoc />
-    public partial class migrationinicial : Migration
+    public partial class intialmigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

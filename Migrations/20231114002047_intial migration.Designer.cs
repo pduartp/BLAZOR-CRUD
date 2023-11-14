@@ -10,8 +10,8 @@ using info_app.Data;
 namespace info_app.Migrations
 {
     [DbContext(typeof(ProdutoDbContext))]
-    [Migration("20231109013042_migration inicial")]
-    partial class migrationinicial
+    [Migration("20231114002047_intial migration")]
+    partial class intialmigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
